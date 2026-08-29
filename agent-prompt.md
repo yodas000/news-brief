@@ -17,17 +17,19 @@ Do not touch `index.html` — the website reads the markdown at runtime.
    step; keyword search does NOT respect a 24-hour window):
    - https://www.aljazeera.net/news/            (الجزيرة)
    - https://www.skynewsarabia.com/middle-east  (سكاي نيوز عربية)
-   - https://www.alarabiya.net/saudi-today      (العربية)
+   - https://ajel.sa/local                      (عاجل — أخبار محلية سعودية مؤرخة)
    - https://www.arabnews.com/saudiarabia       (عرب نيوز)
    - https://aawsat.com/                        (الشرق الأوسط)
-   - https://www.alarabiya.net/aswaq            (العربية - اقتصاد)
+   - https://www.argaam.com/                    (أرقام - أسواق واقتصاد سعودي)
    - https://www.bbc.com/arabic                 (بي بي سي عربي)
    - https://www.aleqt.com/                     (الاقتصادية - النفط والأسواق)
 2. THEN run web searches only to find a SECOND source for each candidate line.
 3. Aim for 6-10 searches total. Do not combine sections into one query.
 
-Known-unreachable, do not waste a call: `spa.gov.sa` returns 403, and
-`reuters.com` is blocked. Reach both via search results instead.
+Known-unreachable, do not waste a call: `spa.gov.sa`, `alarabiya.net` and
+`reuters.com` all refuse fetches (403 or blocked) — reach them via search
+results instead. `alarabiya.net` returns 403 from the site itself, so no
+network allowlist entry will fix it; do not retry it.
 
 ## RULES
 - Only events from the last 24 hours. If a section has nothing, write `لا جديد`.
