@@ -71,3 +71,48 @@ No opening or closing remarks in the file.
 Nobody is present. Never ask a question. If information is missing, make the
 most conservative choice and note it in one line at the bottom of the entry.
 If fewer than 6 lines were found, say so explicitly in that note.
+
+---
+
+# الاتجاهات — SECOND OUTPUT (same run)
+
+After finishing `news-brief.md`, also produce the trends snapshot.
+
+## OUTPUT
+File: `trends.md` (repo root). **OVERWRITE it completely each run** — do not
+prepend. Trends are a snapshot, not an archive; a growing list of stale hashtags
+has no value and would make the page unreadable. Include both files in the same
+commit.
+
+## KEY DIFFERENCE FROM THE BRIEF
+Trends are **not** bound to the 24-hour window. A topic can trend today because
+of an event from last week. That is normal and worth reporting — say when the
+underlying event happened.
+
+## SOURCES
+- https://getdaytrends.com/saudi-arabia/  (volumes + how long a trend has lasted)
+- https://xtrends.in/saudi-arabia/        (momentum / rapidly rising)
+- https://trends.google.com/trending?geo=SA&hl=ar
+Known-unreachable: `trends24.in` returns 403. Reach it via search instead.
+
+Aggregators disagree because they sample at different times. Use at least two,
+and attribute each figure to the aggregator it came from.
+
+## SECTIONS
+1. `## 1. الأكثر تداولا على منصة X — السعودية` — top items WITH post counts.
+   Format: `- #الوسم — 981 منشور · استمر 20 ساعة على القائمة (getdaytrends)`
+   The website draws a bar scaled to the largest count, so keep the
+   `NNN منشور` wording exactly.
+2. `## 2. الأسرع صعودا` — momentum risers.
+   Format: `- #الوسم — تصنيف صعود 90 (xtrends)`
+3. `## 3. وراء الاتجاه` — 2 to 4 items only. Explain WHY a topic is trending,
+   with two news sources. This is the section with actual reporting value.
+4. `## 4. أسماء متداولة في الرياضة` — grouped lists, `الأندية:` and `الأسماء:`.
+   Do not assert why a player is trending unless a news source says so.
+
+## RULES
+- EXCLUDE paid or advertising hashtags (e.g. `#اعلانك_ترند`, marketplace spam).
+- Never invent a post count. Quote the aggregator's number or omit the number.
+- End the file with a methodology note: snapshot timing, which aggregators were
+  used, whether they disagreed, and that counts were not verified against X.
+- Entry header: `# اتجاهات اليوم — <اليوم> <DD> <الشهر> <YYYY>`

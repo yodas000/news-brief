@@ -8,12 +8,15 @@ by a scheduled Claude cloud agent, which prepends the new entry and pushes.
 
 | File | Purpose |
 |---|---|
-| `news-brief.md` | The archive. Newest entry on top, older entries kept forever. Source of truth. |
-| `index.html` | The website. Fetches `news-brief.md` at runtime and renders it. |
+| `news-brief.md` | The news archive. Newest entry on top, older entries kept forever. |
+| `trends.md` | The trends snapshot. **Overwritten** each run, not archived. |
+| `index.html` | The brief page. Fetches `news-brief.md` at runtime. |
+| `trends.html` | The trends page. Fetches `trends.md` at runtime. |
+| `style.css` / `app.js` | Shared look and renderer for both pages. |
 | `agent-prompt.md` | Instructions the scheduled agent follows each run. |
 
-The agent only ever edits `news-brief.md`. The site reads that file live, so a
-new brief appears on the website without the HTML being touched.
+The agent only ever edits `news-brief.md` and `trends.md`. The pages read those
+files live, so new content appears without the HTML being touched.
 
 ## Reading it
 

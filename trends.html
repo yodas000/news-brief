@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<title>الموجز اليومي</title>
+<title>الاتجاهات</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -9,25 +9,25 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./style.css">
 </head>
-<body data-page="news">
+<body data-page="trends">
 <div class="wrap">
   <header class="masthead">
-    <h1>الموجز اليومي</h1>
-    <p class="sub">أخبار الخليج والشرق الأوسط والاقتصاد — آخر 24 ساعة</p>
+    <h1>الاتجاهات</h1>
+    <p class="sub">الأكثر تداولا وانتشارا — لقطة يومية</p>
     <div class="updated" id="updated">جارٍ التحميل…</div>
   </header>
   <nav class="tabs">
-    <a href="./index.html" aria-current="page">الموجز</a>
-    <a href="./trends.html">الاتجاهات</a>
+    <a href="./index.html">الموجز</a>
+    <a href="./trends.html" aria-current="page">الاتجاهات</a>
   </nav>
-  <main id="content"><div class="status">جارٍ تحميل الموجز…</div></main>
+  <main id="content"><div class="status">جارٍ تحميل الاتجاهات…</div></main>
   <footer>
-    يُحدَّث تلقائيًا كل يوم الساعة 08:00 بتوقيت الرياض<br>
-    المصدر <code>news-brief.md</code>
+    الاتجاهات لقطة زمنية وتتغير خلال دقائق<br>
+    المصدر <code>trends.md</code>
   </footer>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
 <script src="./app.js"></script>
-<script>renderFeed({file:'./news-brief.md', mount:'content', updated:'updated', mode:'news'});</script>
+<script>renderFeed({file:'./trends.md', mount:'content', updated:'updated', mode:'trends'});</script>
 </body>
 </html>
