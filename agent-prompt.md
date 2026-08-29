@@ -39,6 +39,18 @@ network allowlist entry will fix it; do not retry it.
 - 6 to 10 bullet lines total across sections 1-3. If you cannot reach 6 with
   real news, write fewer and add the shortfall note at the bottom. Never pad.
 
+### Disagreement between sources is REPORTED, not resolved
+The reader's stated method is to compare sources and watch where they differ.
+So when two sources conflict on a fact — a casualty count, who did what, a
+number, a date — do NOT quietly pick the more plausible one, and do NOT blur
+them into a vague sentence that is true of neither. Give both versions and
+attribute each:
+
+`- السبت 29 أغسطس — ... (رويترز: 12 قتيلا / الجزيرة: 17 قتيلا — المصدران متعارضان)`
+
+Two aggregators reprinting the same agency copy are ONE source, not two.
+That is false corroboration; do not count it as a second source.
+
 ## SECTIONS (in this order)
 1. `## 1. الخليج والسعودية`
 2. `## 2. الشرق الأوسط والحروب`
