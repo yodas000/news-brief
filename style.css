@@ -59,3 +59,10 @@ nav.tabs a[aria-current="page"]{background:var(--accent);border-color:var(--acce
 .status{text-align:center;color:var(--muted);padding:60px 20px;font-size:15px}
 footer{text-align:center;color:var(--muted);font-size:12px;margin-top:36px;line-height:2}
 footer code{background:var(--surface);padding:2px 7px;border-radius:5px;border:1px solid var(--line)}
+
+/* قراءة اليوم — the one prose item; styled to match list rows but roomier */
+.entry p:not(.note){
+  background:var(--bg); border-right:3px solid var(--accent);
+  border-radius:9px; padding:14px 16px; margin:0 0 8px;
+  font-size:15.5px; line-height:2;
+}

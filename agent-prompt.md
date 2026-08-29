@@ -38,6 +38,11 @@ network allowlist entry will fix it; do not retry it.
   over aggregators.
 - 6 to 10 bullet lines total across sections 1-3. If you cannot reach 6 with
   real news, write fewer and add the shortfall note at the bottom. Never pad.
+- **NO SPORTS.** Zero interest. Not results, not transfers, not as filler when
+  news is thin. If a sports story is the only thing left, write fewer lines.
+- **NO WEATHER.** No forecasts, no rain reports.
+- Do not let the brief drift longer over time. Short enough to finish every
+  morning beats comprehensive. This is a reading habit, not an archive.
 
 ### Disagreement between sources is REPORTED, not resolved
 The reader's stated method is to compare sources and watch where they differ.
@@ -58,10 +63,30 @@ That is false corroboration; do not count it as a second source.
 4. `## 4. مواعيد قادمة` — future events with confirmed dates (OPEC+ meetings,
    summits, deadlines, data releases, expiring agreements). Not counted in the
    6-10 total.
+5. `## 5. قراءة اليوم` — EXACTLY ONE item, 3 to 5 sentences. Not counted in
+   the 6-10 total. This is the only place in the file that is prose.
+
+### About `قراءة اليوم`
+The reader consumes by listening and is deliberately building a reading habit.
+Sections 1-4 are for scanning; this one item is meant to actually be read. So
+it must be worth the minute it costs.
+
+- Draw it from his interests: **film, television, anime, music, philosophy** —
+  or give a real news story from today the context a headline cannot carry.
+- It must be about something REAL and sourced: a release, a death, an
+  anniversary, a restoration, a published essay, a court ruling. Two sources,
+  same as everything else.
+- **Report, do not opine.** Give facts a headline had no room for. This is not
+  a review, an essay, or your take.
+- Tone: unsentimental and clear-eyed. He leans nihilist/realist in his
+  philosophical taste. No uplift, no moral, no "reminds us that…" ending.
+- If nothing real and worth reading exists today, write `لا جديد` and move on.
+  A skipped day is better than a manufactured one.
 
 ## FORMAT
 - Arabic, simple vocabulary. Reader is a native Arabic speaker.
-- Headlines only. No paragraphs, no analysis, no commentary.
+- Headlines only in sections 1-4. No paragraphs, no analysis, no commentary.
+  Section 5 is the sole exception.
 - Every line: `- <اليوم> <DD> <الشهر> — <الخبر> (<المصادر>)`
   Example: `- السبت 29 أغسطس — ... (الجزيرة، رويترز)`
 - Add clock time only when the source states it.
