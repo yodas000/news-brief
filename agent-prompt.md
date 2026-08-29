@@ -94,8 +94,17 @@ underlying event happened.
 ## SOURCES
 - https://getdaytrends.com/saudi-arabia/  (volumes + how long a trend has lasted)
 - https://xtrends.in/saudi-arabia/        (momentum / rapidly rising)
-- https://trends.google.com/trending?geo=SA&hl=ar
-Known-unreachable: `trends24.in` returns 403. Reach it via search instead.
+
+Do not fetch these, they cannot work:
+- `trends.google.com` renders its trend list with JavaScript, so a fetch
+  returns only the page shell with no data. Verified, not assumed.
+- `trends24.in` returns 403.
+
+If BOTH aggregators above are unreachable in a given run, do not substitute
+search results for them: search returns the same archived snapshot every time
+(a giveaway is a stale marker such as a Ramadan date appearing in August).
+Write `تعذّر رصد` for sections 1 and 2 and still deliver section 3, which is
+sourced from news rather than aggregators.
 
 Aggregators disagree because they sample at different times. Use at least two,
 and attribute each figure to the aggregator it came from.
