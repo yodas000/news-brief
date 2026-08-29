@@ -60,11 +60,44 @@ That is false corroboration; do not count it as a second source.
 1. `## 1. الخليج والسعودية`
 2. `## 2. الشرق الأوسط والحروب`
 3. `## 3. الاقتصاد والنفط`
-4. `## 4. مواعيد قادمة` — future events with confirmed dates (OPEC+ meetings,
+4. `## 4. الجوف وسكاكا — عاجل وفرص` — see the dedicated rules below. Not
+   counted in the 6-10 total.
+5. `## 5. مواعيد قادمة` — future events with confirmed dates (OPEC+ meetings,
    summits, deadlines, data releases, expiring agreements). Not counted in the
    6-10 total.
-5. `## 5. قراءة اليوم` — EXACTLY ONE item, 3 to 5 sentences. Not counted in
+6. `## 6. قراءة اليوم` — EXACTLY ONE item, 3 to 5 sentences. Not counted in
    the 6-10 total. This is the only place in the file that is prose.
+
+### About `الجوف وسكاكا — عاجل وفرص`
+The reader lives in Sakaka, Al-Jouf. Narrow scope, only two kinds of item:
+
+**(a) Urgent local news** — things that actually affect residents: emergencies,
+service disruptions, major incidents, official announcements with real
+consequences. NOT municipal press releases, NOT routine events, NOT weather.
+Most days there will be none. Write `لا جديد` and move on.
+
+**(b) Hiring and training opportunities** — and here the filter is absolute:
+
+> **The reader holds a high school certificate (ثانوية عامة) and has NO
+> university degree. Only list opportunities open to applicants without a
+> bachelor's degree.**
+
+- Stated requirement is بكالوريوس or above → **exclude it entirely.** Do not
+  list it with a caveat, do not list it "just in case".
+- Requirement not stated anywhere → list it but write `الشرط غير مذكور`.
+  Never assume eligibility in either direction.
+- **Always include the application deadline** and how to apply. An opportunity
+  with a passed deadline is worse than no opportunity — check the date.
+- Commonly eligible: هدف (HRDF) training, منصة دروب free courses, طاقات
+  listings filtered to ثانوية, diploma and vocational tracks, apprenticeships.
+  تمهير (Tamheer) usually requires a degree — verify before listing.
+- Prefer Al-Jouf / Sakaka specifically; remote or nationwide programmes he can
+  do from Sakaka are also fine. Do not list jobs requiring relocation unless
+  the listing is unusually strong.
+
+**This section is NOT bound to the 24-hour window.** What matters is whether
+applications are still open, not when the listing was published. Use web search
+freely here — most job and training portals are not in the fetch allowlist.
 
 ### About `قراءة اليوم`
 The reader consumes by listening and is deliberately building a reading habit.
@@ -78,15 +111,17 @@ it must be worth the minute it costs.
   same as everything else.
 - **Report, do not opine.** Give facts a headline had no room for. This is not
   a review, an essay, or your take.
-- Tone: unsentimental and clear-eyed. He leans nihilist/realist in his
-  philosophical taste. No uplift, no moral, no "reminds us that…" ending.
+- Tone: unsentimental and clear-eyed. His philosophical taste is
+  **philosophical pessimism / realism** (التشاؤم الفلسفي) — the tradition of
+  Schopenhauer, Cioran, Zapffe, Ligotti, with absurdism at its edge. No uplift,
+  no moral, no "reminds us that…" ending. State what happened and stop.
 - If nothing real and worth reading exists today, write `لا جديد` and move on.
   A skipped day is better than a manufactured one.
 
 ## FORMAT
 - Arabic, simple vocabulary. Reader is a native Arabic speaker.
-- Headlines only in sections 1-4. No paragraphs, no analysis, no commentary.
-  Section 5 is the sole exception.
+- Headlines only in sections 1-5. No paragraphs, no analysis, no commentary.
+  Section 6 (`قراءة اليوم`) is the sole exception.
 - Every line: `- <اليوم> <DD> <الشهر> — <الخبر> (<المصادر>)`
   Example: `- السبت 29 أغسطس — ... (الجزيرة، رويترز)`
 - Add clock time only when the source states it.
