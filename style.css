@@ -1,20 +1,40 @@
+/* ---- Light palette (the base; dark redefines only these tokens) ---- */
 :root{
   --bg:#f7f6f3; --surface:#fffffe; --ink:#1a1a18; --muted:#6b6b63;
-  --line:#e2e0d9; --accent:#8a1c1c; --accent-soft:#f2e6e6;
+  --line:#e2e0d9; --accent:#8a1c1c; --accent-soft:#f2e6e6; --onaccent:#fff;
   --src:#5a6b7a; --src-bg:#eef1f4; --warn:#8a5a1c; --warn-bg:#f7efe2;
+  --ok:#2f6b3f; --ok-bg:#e7f1e9;
   --bar:#8a1c1c22;
 }
-body[data-page="trends"]{ --accent:#0f6b6b; --accent-soft:#e2f0f0; --bar:#0f6b6b22; }
+:root body[data-page="opps"]{ --accent:#0f6b6b; --accent-soft:#e2f0f0; --bar:#0f6b6b22 }
+
+/* ---- Dark. Written twice on purpose: once for the system default,
+       once for an explicit toggle, so the toggle wins in both directions. ---- */
 @media (prefers-color-scheme: dark){
-  :root{
+  :root:not([data-theme="light"]){
     --bg:#14140f; --surface:#1c1c18; --ink:#eceae2; --muted:#9a978c;
-    --line:#2e2e28; --accent:#e0736b; --accent-soft:#2c1c1a;
+    --line:#2e2e28; --accent:#e0736b; --accent-soft:#2c1c1a; --onaccent:#14140f;
     --src:#9fb4c4; --src-bg:#22282e; --warn:#d9a545; --warn-bg:#2a2318;
+    --ok:#7fbf8f; --ok-bg:#1b271e;
     --bar:#e0736b33;
   }
-  body[data-page="trends"]{ --accent:#4fc3bd; --accent-soft:#122827; --bar:#4fc3bd33; }
-  .note{ background:#241f16 }
+  :root:not([data-theme="light"]) body[data-page="opps"]{
+    --accent:#4fc3bd; --accent-soft:#122827; --bar:#4fc3bd33;
+  }
+  :root:not([data-theme="light"]) .note{ background:#241f16 }
 }
+:root[data-theme="dark"]{
+  --bg:#14140f; --surface:#1c1c18; --ink:#eceae2; --muted:#9a978c;
+  --line:#2e2e28; --accent:#e0736b; --accent-soft:#2c1c1a; --onaccent:#14140f;
+  --src:#9fb4c4; --src-bg:#22282e; --warn:#d9a545; --warn-bg:#2a2318;
+  --ok:#7fbf8f; --ok-bg:#1b271e;
+  --bar:#e0736b33;
+}
+:root[data-theme="dark"] body[data-page="opps"]{
+  --accent:#4fc3bd; --accent-soft:#122827; --bar:#4fc3bd33;
+}
+:root[data-theme="dark"] .note{ background:#241f16 }
+
 *{box-sizing:border-box}
 body{
   margin:0; background:var(--bg); color:var(--ink);
@@ -27,15 +47,33 @@ header.masthead{border-bottom:3px double var(--line);padding-bottom:18px;margin-
 .masthead .sub{color:var(--muted);font-size:14px;margin:0}
 .updated{display:inline-block;margin-top:12px;font-size:12.5px;color:var(--muted);
   background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:4px 14px}
-nav.tabs{display:flex;gap:8px;justify-content:center;margin-bottom:24px}
+
+nav.tabs{display:flex;gap:8px;justify-content:center;margin-bottom:16px}
 nav.tabs a{
   flex:1;max-width:200px;text-align:center;text-decoration:none;font-size:14.5px;font-weight:500;
   padding:9px 16px;border-radius:10px;border:1px solid var(--line);
   background:var(--surface);color:var(--muted);transition:.15s;
 }
 nav.tabs a:hover{color:var(--ink);border-color:var(--accent)}
-nav.tabs a[aria-current="page"]{background:var(--accent);border-color:var(--accent);color:#fff}
-@media (prefers-color-scheme: dark){nav.tabs a[aria-current="page"]{color:#14140f}}
+nav.tabs a[aria-current="page"]{background:var(--accent);border-color:var(--accent);color:var(--onaccent)}
+
+/* ---- Toolbar: search + theme toggle ---- */
+.toolbar{display:flex;gap:8px;align-items:center;margin-bottom:22px}
+.search{
+  flex:1;font-family:inherit;font-size:14.5px;color:var(--ink);
+  background:var(--surface);border:1px solid var(--line);border-radius:10px;
+  padding:9px 14px;min-width:0;
+}
+.search::placeholder{color:var(--muted)}
+.search:focus{outline:none;border-color:var(--accent)}
+.themetog{
+  flex:none;font-family:inherit;font-size:16px;line-height:1;cursor:pointer;
+  background:var(--surface);border:1px solid var(--line);border-radius:10px;
+  padding:10px 13px;color:var(--muted);
+}
+.themetog:hover{border-color:var(--accent);color:var(--ink)}
+.hits{font-size:12.5px;color:var(--muted);margin:-12px 0 18px;text-align:center}
+
 .entry{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px 20px;margin-bottom:26px}
 .entry > h1{font-size:19px;margin:0 0 18px;padding-bottom:12px;border-bottom:1px solid var(--line);font-weight:700}
 .entry h2{font-size:15px;font-weight:600;color:var(--accent);margin:22px 0 10px;display:flex;align-items:center;gap:8px}
@@ -64,10 +102,25 @@ footer code{background:var(--surface);padding:2px 7px;border-radius:5px;border:1
 .entry p:not(.note){
   background:var(--bg); border-right:3px solid var(--accent);
   border-radius:9px; padding:14px 16px; margin:0 0 8px;
-  font-size:15.5px; line-height:2;
+  font-size:15.5px; line-height:2; position:relative;
 }
 
-/* Read-tracking: the brief is consumed in pieces across the day */
+/* ---- Archive: only today is open; older days fold away ---- */
+.entry.fold > h1{cursor:pointer;margin-bottom:0;padding-bottom:0;border-bottom:none}
+.entry.fold > h1::after{content:"▾";float:left;color:var(--muted);font-size:13px;font-weight:400}
+.entry.fold{padding-bottom:14px}
+.entry.fold > *:not(h1){display:none}
+.entry.fold.open{padding-bottom:22px}
+.entry.fold.open > h1{margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.entry.fold.open > h1::after{content:"▴"}
+.entry.fold.open > *{display:revert}
+.badge-new{
+  display:inline-block;font-size:11px;font-weight:700;color:var(--onaccent);
+  background:var(--accent);border-radius:5px;padding:1px 7px;margin-inline-start:8px;
+  vertical-align:middle;
+}
+
+/* ---- Read-tracking: the brief is consumed in pieces across the day ---- */
 .track{cursor:pointer;transition:opacity .15s,border-color .15s}
 .track:hover{border-right-color:var(--accent)}
 .entry li.read, .entry p.read{opacity:.4}
@@ -75,7 +128,6 @@ footer code{background:var(--surface);padding:2px 7px;border-radius:5px;border:1
   content:"✓";position:absolute;inset-inline-end:10px;top:10px;
   color:var(--accent);font-size:12px;font-weight:700;
 }
-.entry p:not(.note){position:relative}
 .progress{
   display:inline-block;margin:12px 8px 0 0;font-size:12.5px;color:var(--muted);
   background:var(--surface);border:1px solid var(--line);border-radius:99px;
@@ -83,3 +135,19 @@ footer code{background:var(--surface);padding:2px 7px;border-radius:5px;border:1
 }
 .progress:hover{border-color:var(--accent);color:var(--ink)}
 .progress.done{color:var(--accent);border-color:var(--accent)}
+
+/* ---- Opportunities board ---- */
+.otitle{display:block;font-weight:600;font-size:15.5px;margin-bottom:5px;line-height:1.6}
+.ometa{display:flex;flex-wrap:wrap;gap:6px;align-items:center;line-height:1.6}
+.chip{display:inline-block;font-size:12px;color:var(--muted);background:var(--src-bg);
+  border-radius:6px;padding:2px 9px;white-space:nowrap}
+.chip b{font-weight:600;color:var(--ink)}
+.chip.elig{color:var(--ok);background:var(--ok-bg)}
+.chip.elig.unknown{color:var(--warn);background:var(--warn-bg)}
+.chip.dl{font-weight:600;color:var(--ok);background:var(--ok-bg)}
+.chip.dl.soon{color:var(--warn);background:var(--warn-bg)}
+.chip.dl.urgent{color:var(--onaccent);background:var(--accent)}
+.chip.dl.expired{color:var(--muted);background:var(--src-bg);text-decoration:line-through}
+.apply{font-size:12.5px;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent)}
+.apply:hover{opacity:.75}
+.entry li.expired{opacity:.45}

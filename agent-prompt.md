@@ -3,14 +3,23 @@
 Run daily at 08:00 Asia/Riyadh (05:03 UTC).
 
 ## GOAL
-Produce a short Arabic news brief covering the last 24 hours and PREPEND it to
-the top of `news-brief.md` in this repository, then commit and push.
+Two outputs in one run, one commit:
 
-## OUTPUT
+1. `news-brief.md` — today's Arabic news brief, PREPENDED to the top.
+2. `opportunities.md` — the live board of still-open jobs and training,
+   REWRITTEN in full.
+
+Do not touch `index.html`, `opportunities.html`, `style.css` or `app.js`.
+The pages read the markdown at runtime.
+
+Commit message: `brief: <YYYY-MM-DD>`. Both files in the same commit. Then `git push`.
+
+---
+
+# OUTPUT 1 — `news-brief.md`
+
 File: `news-brief.md` (repo root). Prepend today's entry to the TOP.
 Never overwrite or delete older entries. Separate entries with `---` on its own line.
-Commit message: `brief: <YYYY-MM-DD>`. Then `git push`.
-Do not touch `index.html` — the website reads the markdown at runtime.
 
 ## METHOD — fetch first, then corroborate
 1. FETCH these front pages directly for dated headlines (this is the reliable
@@ -32,11 +41,12 @@ results instead. `alarabiya.net` returns 403 from the site itself, so no
 network allowlist entry will fix it; do not retry it.
 
 ## RULES
-- Only events from the last 24 hours. If a section has nothing, write `لا جديد`.
+- Only events from the last 24 hours, except where a section says otherwise.
+  If a section has nothing, write `لا جديد`.
 - Never invent a fact, a date, or a source.
 - Prefer original sources (news agencies, government statements, filings)
   over aggregators.
-- 6 to 10 bullet lines total across sections 1-3. If you cannot reach 6 with
+- **6 to 9 bullet lines total across sections 1-3.** If you cannot reach 6 with
   real news, write fewer and add the shortfall note at the bottom. Never pad.
 - **NO SPORTS.** Zero interest. Not results, not transfers, not as filler when
   news is thin. If a sports story is the only thing left, write fewer lines.
@@ -60,52 +70,51 @@ That is false corroboration; do not count it as a second source.
 1. `## 1. الخليج والسعودية`
 2. `## 2. الشرق الأوسط والحروب`
 3. `## 3. الاقتصاد والنفط`
-4. `## 4. الجوف وسكاكا — عاجل وفرص` — see the dedicated rules below. Not
-   counted in the 6-10 total.
-5. `## 5. مواعيد قادمة` — future events with confirmed dates (OPEC+ meetings,
-   summits, deadlines, data releases, expiring agreements). Not counted in the
-   6-10 total.
-6. `## 6. قراءة اليوم` — EXACTLY ONE item, 3 to 5 sentences. Not counted in
-   the 6-10 total. This is the only place in the file that is prose.
+4. `## 4. الجوف وسكاكا — عاجل` — urgent local news ONLY. Jobs and training
+   no longer live here; they go in `opportunities.md`. Not counted in the 6-9.
+5. `## 5. ثقافة` — see the dedicated rules below. Not counted in the 6-9.
+6. `## 6. مواعيد قادمة` — future events with confirmed dates (OPEC+ meetings,
+   summits, deadlines, data releases, expiring agreements). Not counted in the 6-9.
+7. `## 7. قراءة اليوم` — EXACTLY ONE item, 3 to 5 sentences. Not counted in
+   the 6-9. This is the only place in the file that is prose.
 
-### About `الجوف وسكاكا — عاجل وفرص`
-The reader lives in Sakaka, Al-Jouf. Narrow scope, only two kinds of item:
+### About `الجوف وسكاكا — عاجل`
+The reader lives in Sakaka, Al-Jouf. Only things that actually affect
+residents: emergencies, service disruptions, major incidents, official
+announcements with real consequences. NOT municipal press releases, NOT
+routine events, NOT weather. Most days there will be none. Write `لا جديد`
+and move on. Anything about hiring or training belongs in `opportunities.md`,
+not here.
 
-**(a) Urgent local news** — things that actually affect residents: emergencies,
-service disruptions, major incidents, official announcements with real
-consequences. NOT municipal press releases, NOT routine events, NOT weather.
-Most days there will be none. Write `لا جديد` and move on.
+### About `ثقافة`
+Film, television, anime, music. These are real standing interests, not filler.
 
-**(b) Hiring and training opportunities** — and here the filter is absolute:
-
-> **The reader holds a high school certificate (ثانوية عامة) and has NO
-> university degree. Only list opportunities open to applicants without a
-> bachelor's degree.**
-
-- Stated requirement is بكالوريوس or above → **exclude it entirely.** Do not
-  list it with a caveat, do not list it "just in case".
-- Requirement not stated anywhere → list it but write `الشرط غير مذكور`.
-  Never assume eligibility in either direction.
-- **Always include the application deadline** and how to apply. An opportunity
-  with a passed deadline is worse than no opportunity — check the date.
-- Commonly eligible: هدف (HRDF) training, منصة دروب free courses, طاقات
-  listings filtered to ثانوية, diploma and vocational tracks, apprenticeships.
-  تمهير (Tamheer) usually requires a degree — verify before listing.
-- Prefer Al-Jouf / Sakaka specifically; remote or nationwide programmes he can
-  do from Sakaka are also fine. Do not list jobs requiring relocation unless
-  the listing is unusually strong.
-
-**This section is NOT bound to the 24-hour window.** What matters is whether
-applications are still open, not when the listing was published. Use web search
-freely here — most job and training portals are not in the fetch allowlist.
+- **0 to 2 lines.** Never more. If nothing real happened, write `لا جديد`.
+- **48-hour window, not 24.** Arabic culture desks publish thinly and a strict
+  24 hours would leave this empty most days. Every line still carries its own
+  date, so nothing is presented as newer than it is.
+- Report events, not opinions: a release or release date, a death, a festival
+  award or jury decision, a restoration, a cancellation, a confirmed
+  adaptation, an album or single release, a rights or copyright ruling, a
+  production shutdown.
+- **Never a review, a rating, a ranking, or a "best of" list.** No box-office
+  tables. No recommendations.
+- Two sources, same as everything else. **English-language sources are fine
+  here** — Arabic coverage of anime and international film is thin, and a real
+  second source in English beats a fake one in Arabic. The line itself stays
+  in Arabic.
+- No sports. The rule holds here too; entertainment coverage of athletes is
+  still sports.
 
 ### About `قراءة اليوم`
 The reader consumes by listening and is deliberately building a reading habit.
-Sections 1-4 are for scanning; this one item is meant to actually be read. So
+Sections 1-6 are for scanning; this one item is meant to actually be read. So
 it must be worth the minute it costs.
 
 - Draw it from his interests: **film, television, anime, music, philosophy** —
   or give a real news story from today the context a headline cannot carry.
+- Do not simply restate the `ثقافة` line in longer form. If the day's best
+  reading item is cultural, put it here and drop it from `ثقافة`.
 - It must be about something REAL and sourced: a release, a death, an
   anniversary, a restoration, a published essay, a court ruling. Two sources,
   same as everything else.
@@ -120,8 +129,8 @@ it must be worth the minute it costs.
 
 ## FORMAT
 - Arabic, simple vocabulary. Reader is a native Arabic speaker.
-- Headlines only in sections 1-5. No paragraphs, no analysis, no commentary.
-  Section 6 (`قراءة اليوم`) is the sole exception.
+- Headlines only in sections 1-6. No paragraphs, no analysis, no commentary.
+  Section 7 (`قراءة اليوم`) is the sole exception.
 - Every line: `- <اليوم> <DD> <الشهر> — <الخبر> (<المصادر>)`
   Example: `- السبت 29 أغسطس — ... (الجزيرة، رويترز)`
 - Add clock time only when the source states it.
@@ -148,54 +157,213 @@ If fewer than 6 lines were found, say so explicitly in that note.
 
 ---
 
-# الاتجاهات — SECOND OUTPUT (same run)
+# OUTPUT 2 — `opportunities.md`
 
-After finishing `news-brief.md`, also produce the trends snapshot.
+A live board of opportunities that are **still open right now**. Not an
+archive, not a daily entry. The whole point is that an item stays visible for
+as long as it can still be applied to, and disappears the moment it cannot.
 
-## OUTPUT
-File: `trends.md` (repo root). **OVERWRITE it completely each run** — do not
-prepend. Trends are a snapshot, not an archive; a growing list of stale hashtags
-has no value and would make the page unreadable. Include both files in the same
-commit.
+## THE FILTER — absolute, read this before anything else
 
-## KEY DIFFERENCE FROM THE BRIEF
-Trends are **not** bound to the 24-hour window. A topic can trend today because
-of an event from last week. That is normal and worth reporting — say when the
-underlying event happened.
+> **The reader holds a high school certificate (ثانوية عامة) and has NO
+> university degree. Only list opportunities open to applicants without a
+> bachelor's degree.**
 
-## SOURCES
-- https://getdaytrends.com/saudi-arabia/  (volumes + how long a trend has lasted)
-- https://xtrends.in/saudi-arabia/        (momentum / rapidly rising)
+- Stated requirement is بكالوريوس or above → **exclude it entirely.** Do not
+  list it with a caveat, do not list it "just in case". It wastes his time.
+- Requirement not stated anywhere → list it, and write `الشرط غير مذكور` in
+  the الشرط field. Never assume eligibility in either direction.
+- Commonly eligible: هدف (HRDF) training, منصة دروب free courses, طاقات
+  listings filtered to ثانوية, diploma and vocational tracks, apprenticeships,
+  on-the-job training schemes.
+- تمهير (Tamheer) usually requires a degree — verify before listing.
+- Prefer Al-Jouf / Sakaka. Remote or nationwide programmes he can do from
+  Sakaka are also fine. Do not list anything requiring relocation unless the
+  listing is unusually strong.
 
-Do not fetch these, they cannot work:
-- `trends.google.com` renders its trend list with JavaScript, so a fetch
-  returns only the page shell with no data. Verified, not assumed.
-- `trends24.in` returns 403.
+## PROCEDURE — rewrite, carrying forward
+1. Read the current `opportunities.md`.
+2. **Drop every item whose `آخر موعد` is earlier than today.** No grace period.
+3. For each surviving item, **re-fetch its `التقديم` link** and re-check the
+   listing. Drop it if the link is dead, if the listing is gone or closed, or
+   if it now states a degree requirement. See LINKS below — this step is not
+   optional and carrying an item forward is not a reason to skip it.
+4. Search for new items and add them. Use web search freely here — job and
+   training portals are not in the fetch allowlist.
+5. Sort each section by deadline, **soonest first**. Items with `مفتوح` go last.
+6. **Cap the board at 8 items total.** If more qualify, keep the 8 with the
+   nearest deadlines. At most 3 of the 8 may be open-ended free courses —
+   they never expire and would otherwise crowd out real deadlines.
+7. Write the file from scratch. Do not prepend, do not keep old headers.
 
-If BOTH aggregators above are unreachable in a given run, do not substitute
-search results for them: search returns the same archived snapshot every time
-(a giveaway is a stale marker such as a Ramadan date appearing in August).
-Write `تعذّر رصد` for sections 1 and 2 and still deliver section 3, which is
-sourced from news rather than aggregators.
+**This file is NOT bound to the 24-hour window.** What matters is whether
+applications are still open, not when the listing appeared.
 
-Aggregators disagree because they sample at different times. Use at least two,
-and attribute each figure to the aggregator it came from.
+## LINE FORMAT — exact, the page parses it
+```
+- <العنوان> — الجهة: <الجهة> · المكان: <المكان> · الشرط: <المؤهل> · آخر موعد: <YYYY-MM-DD> · التقديم: <رابط> (<مصدر1>، <مصدر2>)
+```
+
+- The separator between fields is the middle dot `·`, and every field is
+  `المفتاح: القيمة`. The keys `الجهة`, `المكان`, `الشرط`, `آخر موعد` and
+  `التقديم` are read by name — do not rename or translate them.
+- `التقديم` is governed by the LINKS section below. Read it before writing a
+  single URL.
+- **`آخر موعد` MUST be an ISO date, `YYYY-MM-DD`.** The page computes the days
+  remaining from it: the chip turns amber at 14 days, red at 3 days, and is
+  struck through once the date has passed. Any other date format silently
+  loses the countdown. If the deadline is genuinely open-ended, write
+  `آخر موعد: مفتوح` — that exact word.
+- Sources in parentheses at the end, same rules as the brief: two sources,
+  or tag `مصدر واحد`.
+
+Example of a correct line:
+```
+- تدريب منتهٍ بالتوظيف في إدارة الموارد البشرية — الجهة: صندوق تنمية الموارد البشرية (هدف) · المكان: سكاكا · الشرط: ثانوية عامة · آخر موعد: 2026-09-18 · التقديم: https://www.hrdf.org.sa/... (هدف، طاقات)
+```
+
+## LINKS — the strictest rule in this file
+
+A wrong link is worse than no link. If he taps an application link and it is
+dead, or it opens a different programme, he has lost the opportunity AND stopped
+trusting the page. There is no partial credit here.
+
+### The governing rule
+> **Never write a URL from memory, and never build one by hand.**
+> A URL may only be written if it was returned by a fetch or a search result
+> **in this run**, copied character for character, and then confirmed to load.
+
+You will feel confident that you know a portal's address. That feeling is not
+evidence. Domains change, paths get restructured, and a plausible-looking URL
+that you assembled yourself is a fabrication even when the domain is real.
+Guessing a path is the same offence as inventing a fact.
+
+### Mandatory check before writing any link
+1. Fetch the exact URL you intend to write.
+2. It must return **200**. A 403, 404, 410, or a timeout means the link fails.
+3. The page that comes back must be **the listing itself** — its text must
+   contain the programme title, or the issuing body plus the deadline. A portal
+   homepage, a search page, a login wall, or a generic "opportunities" index is
+   NOT the listing.
+4. Only then may the URL go in the line.
+
+A redirect to a stable page is fine — record the URL you were redirected to,
+not the one you started from.
+
+### Banned link shapes — never write these
+- **Search-engine and aggregator redirects.** Anything containing
+  `google.com/url?`, `bing.com/ck/`, `duckduckgo.com/l/`, `r.search.yahoo`,
+  `news.google.com/rss/articles`. Follow the redirect and write the real
+  destination.
+- **Shorteners.** `bit.ly`, `t.co`, `lnkd.in`, `goo.gl`, `tinyurl`, and any
+  other. Resolve them and write the destination, or drop the item.
+- **Tracking junk.** Strip `utm_*`, `fbclid`, `gclid`, `?ref=`, session ids and
+  anything after `#` unless the fragment is load-bearing.
+- **Plain `http://`.** HTTPS only. If a site offers only HTTP, describe how to
+  apply in words instead.
+- **Anything behind a login** that cannot be seen without an account.
+- **A link to a news article about the programme** in the `التقديم` field. That
+  is a source, and belongs in the parentheses. `التقديم` is where he applies.
+
+### Domain has to belong to the issuing body
+The domain must be the official one for the `الجهة` you named, and you must
+have **seen that domain in this run's fetch or search results** — not recalled
+it. If the issuing body is a government fund and the link is to a private job
+board reposting it, prefer the official page; use the reposter only if the
+official listing genuinely cannot be reached, and then tag it `مصدر واحد`.
+
+Watch for lookalike domains: a hyphen added, `.com` where the real one is
+`.gov.sa` or `.org.sa`, an extra word in the path. If two candidate domains
+differ at all, you have not verified anything — go back to the source page and
+copy the link from there.
+
+### When a link cannot be verified — the degrade path
+Do not drop the opportunity, and do not write a URL you could not confirm.
+Write the instructions in words instead:
+
+```
+· التقديم: عبر بوابة طاقات، ابحث عن المسمى في قسم التدريب — تعذّر تأكيد رابط مباشر
+```
+
+The page renders a non-URL `التقديم` value as plain text rather than a link, so
+this is a supported outcome, not a failure. An honest "here is how to find it"
+beats a link that breaks.
+
+### Re-check every carried-over link, every run
+Carrying an item forward is not a reason to trust its link. Listings close and
+get taken down without the deadline passing. On every run, re-fetch every URL
+already in the file. If one now returns 404 or 403, or the page no longer shows
+the listing, remove that item — do not leave it up because the date is still in
+the future.
+
+### Run the checker before committing — not optional
+The repo ships `check-links.sh`. After writing `opportunities.md` and before
+`git commit`, run it from the repo root:
+
+```
+./check-links.sh
+```
+
+It fetches every link in the file, follows redirects, and fails on a non-200,
+on plain `http://`, on a shortener, on a search-engine redirect, and on
+tracking parameters. **It must exit 0 before you commit.**
+
+If it reports a failure, fix that line — replace the link with a verified one,
+or take the degrade path and write the application route in words. Do not
+commit a file the checker rejects, and never edit the checker to make it pass.
+
+### A blocked host is NOT a dead link — tell them apart
+This environment blocks outbound network access by default, and the allowlist
+is configured per-environment, outside this repo. So a failure can mean either
+"the link is dead" or "this environment cannot reach that host at all". These
+demand opposite responses and must never be confused.
+
+- The tell is the error itself: `EGRESS_BLOCKED`, a connection refused, or a
+  DNS failure means the network stopped you. A clean `404`, `403` or `410` from
+  the server means the link is genuinely bad.
+- **Link genuinely dead → drop the item.**
+- **Host blocked by the network → keep the item.** Take the degrade path: write
+  the application route in words, and note in the closing `ملاحظة:` line that
+  the link could not be checked from this environment and name the host.
+- **Never drop a real opportunity because of a network restriction**, and never
+  present a blocked host as a verified link either.
+- List every host that was blocked in the closing note, so the allowlist can be
+  updated. Note that `*.example.com` does not match a bare `example.com` — both
+  forms have to be listed.
+
+### Report it
+The closing `ملاحظة:` line must state how many links were verified this run and
+how many items were dropped or degraded because a link failed. If you wrote any
+`التقديم` value that is not a verified URL, say which.
 
 ## SECTIONS
-1. `## 1. الأكثر تداولا على منصة X — السعودية` — top items WITH post counts.
-   Format: `- #الوسم — 981 منشور · استمر 20 ساعة على القائمة (getdaytrends)`
-   The website draws a bar scaled to the largest count, so keep the
-   `NNN منشور` wording exactly.
-2. `## 2. الأسرع صعودا` — momentum risers.
-   Format: `- #الوسم — تصنيف صعود 90 (xtrends)`
-3. `## 3. وراء الاتجاه` — 2 to 4 items only. Explain WHY a topic is trending,
-   with two news sources. This is the section with actual reporting value.
-4. `## 4. أسماء متداولة في الرياضة` — grouped lists, `الأندية:` and `الأسماء:`.
-   Do not assert why a player is trending unless a news source says so.
+1. `## 1. الجوف وسكاكا`
+2. `## 2. عن بُعد أو على مستوى المملكة`
+
+If a section has nothing, write `لا فرص مفتوحة حاليا` as a plain line, not a
+bullet.
+
+## FILE HEADER AND NOTE
+- Header: `# فرص مفتوحة — <اليوم> <DD> <الشهر> <YYYY>`
+- End the file with a `ملاحظة:` line stating how many items were carried
+  forward, how many were dropped as expired or closed, and how many are new.
+  If a carried item could not be re-verified this run, say so and keep it,
+  flagged `لم يُعد التحقق`.
+- The same note must carry the link report required by the LINKS section: how
+  many `التقديم` links were fetched and returned 200 this run, how many items
+  were dropped because a link failed, and which items were written with a
+  worded `التقديم` instead of a verified URL.
 
 ## RULES
-- EXCLUDE paid or advertising hashtags (e.g. `#اعلانك_ترند`, marketplace spam).
-- Never invent a post count. Quote the aggregator's number or omit the number.
-- End the file with a methodology note: snapshot timing, which aggregators were
-  used, whether they disagreed, and that counts were not verified against X.
-- Entry header: `# اتجاهات اليوم — <اليوم> <DD> <الشهر> <YYYY>`
+- Never invent a deadline. If the listing does not state one, search for it;
+  if it still cannot be found, write `آخر موعد: مفتوح` and note it.
+- **An opportunity whose deadline has passed is worse than no opportunity.**
+  Check the date against today before writing any line.
+- Never list something requiring a bachelor's degree. There is no exception.
+- **Never write an unverified URL.** A fabricated or stale application link is
+  the worst failure this file can produce — it costs him the opportunity and
+  the page its credibility. Fetch it, confirm 200, confirm it is the listing,
+  or write words instead. See LINKS.
+- Fewer verified items beat more unverified ones. Publishing three real
+  opportunities with working links is a good run; eight with one dead link is
+  a bad one.
