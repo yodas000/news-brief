@@ -1,5 +1,5 @@
-/* Shared renderer for the brief and the opportunities board.
-   Both read a markdown file at runtime; neither is edited by the agent. */
+/* Renderer for the brief.
+   Reads news-brief.md at runtime; it is never edited by a run. */
 (function(){
 
   /* ---------- theme: system by default, an explicit choice overrides it ---------- */
@@ -125,131 +125,6 @@
     });
   }
 
-  /* ---------- opportunities decoration ---------- */
-  var MS_DAY = 86400000;
-  var K_DEADLINE = 'آخر موعد';
-  var K_APPLY    = 'التقديم';
-  var K_ELIG     = 'الشرط';
-
-  function daysUntil(iso){
-    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso);
-    if (!m) return null;
-    var due = new Date(+m[1], +m[2] - 1, +m[3]);
-    var now = new Date();
-    var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    return Math.round((due - today) / MS_DAY);
-  }
-
-  function deadlineChip(value){
-    var span = document.createElement('span');
-    var iso = (value.match(/\d{4}-\d{2}-\d{2}/) || [null])[0];
-    var d = iso ? daysUntil(iso) : null;
-
-    if (d === null){                       // open-ended, or an unparseable date
-      span.className = 'chip';
-      span.innerHTML = K_DEADLINE + ': <b>' + value + '</b>';
-      return { el: span, expired: false };
-    }
-    span.className = 'chip dl';
-    if (d < 0){
-      span.classList.add('expired');
-      span.textContent = 'انتهى ' + iso;
-      return { el: span, expired: true };
-    }
-    if (d <= 3) span.classList.add('urgent');
-    else if (d <= 14) span.classList.add('soon');
-
-    span.textContent = d === 0
-      ? 'آخر يوم للتقديم'
-      : 'باقٍ ' + d + ' يوم · ' + iso;
-    return { el: span, expired: false };
-  }
-
-  function decorateOpps(root){
-    Array.prototype.slice.call(root.querySelectorAll('li')).forEach(function(li){
-      var raw = li.innerHTML;
-      var sources = null;
-
-      raw = raw.replace(/\(([^()]*)\)\s*$/, function(_, inner){
-        sources = { text: inner, weak: /مصدر واحد|غير مذكور/.test(inner) };
-        return '';
-      });
-
-      var cut = raw.indexOf('—');
-      if (cut === -1) return;                       // not in the expected shape
-      var title = raw.slice(0, cut).trim();
-      var meta  = raw.slice(cut + 1).trim();
-
-      var titleEl = document.createElement('span');
-      titleEl.className = 'otitle';
-      titleEl.innerHTML = title;
-
-      var metaEl = document.createElement('span');
-      metaEl.className = 'ometa';
-      var expired = false;
-
-      meta.split('·').forEach(function(part){
-        part = part.trim();
-        if (!part) return;
-        var at = part.indexOf(':');
-        var key = at === -1 ? '' : part.slice(0, at).trim();
-        var val = at === -1 ? part : part.slice(at + 1).trim();
-
-        if (key === K_DEADLINE){
-          var dl = deadlineChip(val);
-          expired = dl.expired;
-          metaEl.appendChild(dl.el);
-          return;
-        }
-
-        if (key === K_APPLY){
-          var url = (val.match(/https?:\/\/[^\s<"']+/) || [null])[0];
-          if (url){
-            var a = document.createElement('a');
-            a.className = 'apply';
-            a.textContent = 'رابط التقديم';
-            a.href = url;
-            a.rel = 'noopener';
-            a.target = '_blank';
-            metaEl.appendChild(a);
-          } else {
-            var c = document.createElement('span');
-            c.className = 'chip';
-            c.innerHTML = K_APPLY + ': <b>' + val + '</b>';
-            metaEl.appendChild(c);
-          }
-          return;
-        }
-
-        var chip = document.createElement('span');
-        if (key === K_ELIG){
-          chip.className = 'chip elig' + (/غير مذكور/.test(val) ? ' unknown' : '');
-          chip.textContent = val;
-        } else if (key){
-          chip.className = 'chip';
-          chip.innerHTML = key + ': <b>' + val + '</b>';
-        } else {
-          chip.className = 'chip';
-          chip.innerHTML = part;
-        }
-        metaEl.appendChild(chip);
-      });
-
-      if (sources){
-        var s = document.createElement('span');
-        s.className = 'src' + (sources.weak ? ' one' : '');
-        s.innerHTML = sources.text;
-        metaEl.appendChild(s);
-      }
-
-      li.innerHTML = '';
-      li.appendChild(titleEl);
-      li.appendChild(metaEl);
-      // A missed run can leave a passed deadline on the page; grey it out anyway.
-      if (expired) li.classList.add('expired');
-    });
-  }
-
   function markNotes(root){
     Array.prototype.slice.call(root.querySelectorAll('p')).forEach(function(p){
       if (/^\s*ملاحظة/.test(p.textContent)) p.className = 'note';
@@ -341,7 +216,7 @@
           var div = document.createElement('div');
           div.className = 'entry';
           div.innerHTML = marked.parse(part.trim());
-          if (opts.mode === 'opps') decorateOpps(div); else decorateNews(div);
+          decorateNews(div);
           markNotes(div);
           content.appendChild(div);
           entries.push(div);
