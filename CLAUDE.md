@@ -230,44 +230,31 @@ than 6 lines were found, say so explicitly in that note.
 
 ---
 
-## Email delivery
+## Email delivery — built, then shelved
 
-`.github/workflows/email-brief.yml` mails the newest entry. It fires **on a push
-that changes `news-brief.md`** rather than on a clock — the routine's own push is
-the signal, so mail never goes out before a brief exists. `workflow_dispatch`
-gives a manual send for testing.
+A GitHub Action that mailed the newest entry was built and removed on
+2026-09-13, same day, his call: *"we might try it later."* It never ran and no
+secrets were ever set, so there is nothing live and nothing to clean up.
 
-`tools/email_brief.py` does the work: newest entry only, rendered as RTL HTML
-with a plain-text fallback. Python stdlib, no dependencies, **no third-party
-marketplace action** — this repo is public and an action would run with the mail
-password in its environment.
-
-Six repository secrets, Settings → Secrets and variables → Actions. **None of
-these belongs in a file here — the repo is public, and that includes the
-destination address.**
-
-| Secret | |
-|---|---|
-| `SMTP_SERVER` | e.g. `smtp.gmail.com` |
-| `SMTP_PORT` | `587` for STARTTLS, `465` for SSL — the script picks by port |
-| `SMTP_USER` | the sending mailbox |
-| `SMTP_PASS` | an app password, never the account password |
-| `MAIL_TO` | where the brief goes |
-| `MAIL_FROM` | optional; defaults to `SMTP_USER` |
-
-**Proton cannot be the sender.** Proton offers no standard SMTP on personal
-plans, and Bridge only exposes SMTP on a running desktop, which a GitHub runner
-is not. Send *from* something with real SMTP — a Gmail app password is the
-shortest path — *to* the Proton address in `MAIL_TO`.
-
-Test locally without sending anything:
+It is whole in history — `git show 56445a9` — and comes back with:
 
 ```bash
-python3 tools/email_brief.py --dry-run    # prints the HTML
+git checkout 56445a9 -- .github/workflows/email-brief.yml tools/email_brief.py
 ```
 
-If a run fails with `missing secrets: …`, that is the script refusing to
-half-send; it names the keys and never echoes a value.
+How it worked, so the thinking is not re-done: it fired on a push touching
+`news-brief.md` rather than on a cron, because the routine's own push is the
+signal and a scheduled send would mail yesterday's entry whenever the routine
+ran late. The sender was Python stdlib, no marketplace action — this repo is
+public and a third-party action would run with the mail password in its
+environment. Six secrets, none of them in a file: `SMTP_SERVER`, `SMTP_PORT`,
+`SMTP_USER`, `SMTP_PASS`, `MAIL_TO`, optional `MAIL_FROM`. The destination
+address was a secret too; a public repo is no place for it.
+
+The one blocker to know before trying again: **Proton cannot be the sender.**
+No standard SMTP on personal plans, and Bridge only serves SMTP from a running
+desktop, which a runner is not. Send from a mailbox with real SMTP to the Proton
+address.
 
 ## The page
 
@@ -276,7 +263,6 @@ half-send; it names the keys and never echoes a value.
 | `news-brief.md` | The archive. Newest entry on top, older entries kept forever. The only file a run edits. |
 | `index.html` | The page. Fetches `news-brief.md` at runtime. |
 | `style.css` / `app.js` | Look and renderer. |
-| `.github/workflows/email-brief.yml` + `tools/email_brief.py` | Email delivery, above. |
 
 - **Reading it:** GitHub Pages from the `main` branch root. Locally,
   `python3 -m http.server 8000` then open `http://localhost:8000` — opening
