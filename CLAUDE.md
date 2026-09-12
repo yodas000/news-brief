@@ -15,23 +15,18 @@ concluding anything about whether this project is alive. That mistake was made
 on 2026-09-13 and very nearly deleted a working project's documentation on the
 strength of it.
 
-**The scheduled task's own prompt is a second spec, and it disagrees with this
-repo.** The archive notes record the agent flagging this on at least three runs
-(1, 2 and 4 September) and nobody acting on it: the scheduled task text still
-instructs it to produce a file called `trends.md` and a page `trends.html`, which
-have not existed since the trends page was replaced. Each run correctly followed
-the repo spec instead and said so in its note — *"يلزم تحديث نص المهمة المجدولة
-نفسها (لا الملف)"*, the scheduled task text needs updating, not the file — and
-each time it recurred.
+**The routine's prompt was updated on 2026-09-13 and now points here.** It says
+to read this file and follow it, and deliberately restates none of the rules —
+a rule repeated in the routine text is a second source that drifts out of step
+with this file. That is not hypothetical: the archive notes for 1, 2 and 4
+September record the agent finding the routine asking for a `trends.md` and
+`trends.html` that had not existed since the trends page was replaced. It
+followed the repo instead and flagged it each time. **That one was fixed on
+4 September** — the prompt carried no mention of `trends.md` by the time it was
+read today — but it names the failure mode exactly.
 
-**The routine's prompt needs editing, and it is the one thing here an agent
-cannot reach.** It should say exactly one thing: read `CLAUDE.md` in this repo
-and follow it. No file names, no section lists, no rules restated in the task
-text. Anything a routine prompt repeats becomes a second source that drifts,
-which is precisely what happened. As it stands it names `trends.md` and
-`trends.html`, which never existed here, and `agent-prompt.md`, which was
-deleted on 2026-09-13 — so tomorrow's run will be told to read a file that is
-gone. **Fix the routine text before the next run.**
+**Keep it that way.** If the routine needs to know something new, put it in this
+file and leave the routine prompt alone.
 
 **The jobs and training board was removed on 2026-09-13.** `opportunities.md`,
 `opportunities.html` and `check-links.sh` are gone, with the board's CSS and its
