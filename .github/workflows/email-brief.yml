@@ -1,0 +1,39 @@
+name: email the brief
+
+# Fires when the brief actually changes, not on a clock. The daily routine
+# pushes news-brief.md when it finishes, and that push IS the signal - so the
+# mail goes out after a real brief exists, never before one was written.
+on:
+  push:
+    paths: ['news-brief.md']
+  workflow_dispatch:          # manual send, for testing the secrets
+
+# Read-only. This job sends mail; it has no business writing to the repo.
+permissions:
+  contents: read
+
+concurrency:
+  group: email-brief
+  cancel-in-progress: false   # never cut a send off half-way
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # Stdlib only - nothing to install, and no third-party action ever sees
+      # the mail password.
+      - name: Send
+        env:
+          SMTP_SERVER: ${{ secrets.SMTP_SERVER }}
+          SMTP_PORT:   ${{ secrets.SMTP_PORT }}
+          SMTP_USER:   ${{ secrets.SMTP_USER }}
+          SMTP_PASS:   ${{ secrets.SMTP_PASS }}
+          MAIL_TO:     ${{ secrets.MAIL_TO }}
+          MAIL_FROM:   ${{ secrets.MAIL_FROM }}
+        run: python3 tools/email_brief.py

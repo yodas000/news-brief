@@ -230,6 +230,45 @@ than 6 lines were found, say so explicitly in that note.
 
 ---
 
+## Email delivery
+
+`.github/workflows/email-brief.yml` mails the newest entry. It fires **on a push
+that changes `news-brief.md`** rather than on a clock — the routine's own push is
+the signal, so mail never goes out before a brief exists. `workflow_dispatch`
+gives a manual send for testing.
+
+`tools/email_brief.py` does the work: newest entry only, rendered as RTL HTML
+with a plain-text fallback. Python stdlib, no dependencies, **no third-party
+marketplace action** — this repo is public and an action would run with the mail
+password in its environment.
+
+Six repository secrets, Settings → Secrets and variables → Actions. **None of
+these belongs in a file here — the repo is public, and that includes the
+destination address.**
+
+| Secret | |
+|---|---|
+| `SMTP_SERVER` | e.g. `smtp.gmail.com` |
+| `SMTP_PORT` | `587` for STARTTLS, `465` for SSL — the script picks by port |
+| `SMTP_USER` | the sending mailbox |
+| `SMTP_PASS` | an app password, never the account password |
+| `MAIL_TO` | where the brief goes |
+| `MAIL_FROM` | optional; defaults to `SMTP_USER` |
+
+**Proton cannot be the sender.** Proton offers no standard SMTP on personal
+plans, and Bridge only exposes SMTP on a running desktop, which a GitHub runner
+is not. Send *from* something with real SMTP — a Gmail app password is the
+shortest path — *to* the Proton address in `MAIL_TO`.
+
+Test locally without sending anything:
+
+```bash
+python3 tools/email_brief.py --dry-run    # prints the HTML
+```
+
+If a run fails with `missing secrets: …`, that is the script refusing to
+half-send; it names the keys and never echoes a value.
+
 ## The page
 
 | File | |
@@ -237,6 +276,7 @@ than 6 lines were found, say so explicitly in that note.
 | `news-brief.md` | The archive. Newest entry on top, older entries kept forever. The only file a run edits. |
 | `index.html` | The page. Fetches `news-brief.md` at runtime. |
 | `style.css` / `app.js` | Look and renderer. |
+| `.github/workflows/email-brief.yml` + `tools/email_brief.py` | Email delivery, above. |
 
 - **Reading it:** GitHub Pages from the `main` branch root. Locally,
   `python3 -m http.server 8000` then open `http://localhost:8000` — opening
